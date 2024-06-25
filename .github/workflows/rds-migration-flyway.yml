@@ -5,4 +5,12 @@ jobs:
   rds-migration-flyway:
     runs-on: [hyperenv, demo]
     steps:
-    - run: 'echo "Hello HyperEnv"'
+    - name: migrate
+      uses: docker://redgate/flyway:10
+      with:
+        args: >-
+          migrate
+          -workingDirectory="/github/workspace/rds-migration-flyway/"
+          -url="${{ secrets.FLYWAY_URL }}"
+          -user="${{ secrets.FLYWAY_USER }}"
+          -password="${{ secrets.FLYWAY_PASSWORD }}"

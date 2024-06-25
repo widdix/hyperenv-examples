@@ -1,0 +1,8 @@
+name: rds-migration-flyway
+on:
+  workflow_dispatch
+jobs:
+  rds-migration-flyway:
+    runs-on: [hyperenv, demo]
+    steps:
+    - run: 'echo "Hello HyperEnv"'

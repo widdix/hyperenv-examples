@@ -10,7 +10,7 @@ jobs:
       with:
         args: >-
           migrate
-          -workingDirectory="/github/workspace/rds-migration-flyway/"
+          -workingDirectory="${{ github.workspace }}/rds-migration-flyway/"
           -url="${{ secrets.FLYWAY_URL }}"
           -user="${{ secrets.FLYWAY_USER }}"
           -password="${{ secrets.FLYWAY_PASSWORD }}"

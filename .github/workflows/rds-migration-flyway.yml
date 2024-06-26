@@ -1,10 +1,15 @@
 name: rds-migration-flyway
 on:
-  workflow_dispatch
+  workflow_dispatch:
+  push:
 jobs:
   rds-migration-flyway:
     runs-on: [hyperenv, demo]
     steps:
+    - uses: docker://amazonlinux:2
+      with:
+        args: >-
+          ls -la
     - name: migrate
       uses: docker://redgate/flyway:10
       with:

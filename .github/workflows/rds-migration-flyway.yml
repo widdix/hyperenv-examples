@@ -9,8 +9,7 @@ jobs:
     - uses: docker://amazonlinux:2
       with:
         args: >-
-          yum install tree -y
-          tree /github
+          yum install tree -y && tree /github
     - name: migrate
       uses: docker://redgate/flyway:10
       with:

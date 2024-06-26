@@ -10,9 +10,8 @@ jobs:
       with:
         args: >-
           migrate
-          -workingDirectory="/github/workspace/rds-migration-flyway/"
+          -configFiles="/github/workspace/rds-migration-flyway/flyway.toml"
+          -locations="filesystem:/github/workspace/rds-migration-flyway/migrations"
           -url="${{ secrets.FLYWAY_URL }}"
           -user="${{ secrets.FLYWAY_USER }}"
           -password="${{ secrets.FLYWAY_PASSWORD }}"
-      env:
-        FLYWAY_CONFIG_FILES: '/github/workspace/rds-migration-flyway/flyway.toml'

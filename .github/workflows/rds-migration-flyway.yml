@@ -6,6 +6,8 @@ jobs:
   rds-migration-flyway:
     runs-on: [hyperenv, demo]
     steps:
+    - run: 'ls -la /opt/hyperenv/_work/hyperenv-examples'
+    - run: 'ls -la /opt/hyperenv/_work/hyperenv-examples/hyperenv-examples'
     - uses: docker://amazonlinux:2
       with:
         args: >-

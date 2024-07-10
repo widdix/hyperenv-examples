@@ -1,0 +1,32 @@
+name: build-deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ['hyperenv', 'demo']
+    container:
+      image: 486555357186.dkr.ecr.us-east-1.amazonaws.com/cicd-tools:main
+    concurrency:
+      group: 'build-deploy'
+      cancel-in-progress: false
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 'Assuming IAM role'
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::486555357186:role/github-oidc
+        role-session-name: build-deploy
+        aws-region: us-east-1
+
+    - name: 'Deploy'
+      run: 'tofu apply'
+      working-directory: build-cicd-image

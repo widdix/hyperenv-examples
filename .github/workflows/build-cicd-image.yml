@@ -1,0 +1,32 @@
+name: build-cicd-image
+
+on:
+  push:
+    # tags: ['*']
+    
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ['hyperenv', 'demo']
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: 'Assuming IAM role'
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::486555357186:role/github-oidc
+        role-session-name: deploy
+        aws-region: eu-central-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: 'Enable Multi Arch'
+      run: docker buildx create --use
+
+    - name: 'Build container image'
+      run: docker buildx build --platform linux/arm64,linux/amd64 --push -t 486555357186.dkr.ecr.us-east-1.amazonaws.com/cicd-tools:${{github.ref_name}} .

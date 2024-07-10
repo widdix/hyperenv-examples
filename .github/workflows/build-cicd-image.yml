@@ -30,3 +30,4 @@ jobs:
 
     - name: 'Build container image'
       run: docker buildx build --platform linux/arm64,linux/amd64 --push -t 486555357186.dkr.ecr.us-east-1.amazonaws.com/cicd-tools:${{github.ref_name}} .
+      working-directory: build-cicd-image

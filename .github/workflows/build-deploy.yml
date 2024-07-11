@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   deploy:
-    runs-on: ['hyperenv']
+    runs-on: ['hyperenv-beta', 'byo-vpc']
     container:
       image: 486555357186.dkr.ecr.us-east-1.amazonaws.com/cicd-tools:main
     concurrency:

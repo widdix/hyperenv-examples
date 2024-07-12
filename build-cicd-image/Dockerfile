@@ -1,6 +1,6 @@
 FROM amazonlinux:2023
 RUN curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
-RUN yum install nodejs -y
+RUN yum install nodejs git tar -y
 RUN yum update -y
 RUN yum install -y awscli unzip
 RUN if [ "$(uname -m)" == "x86_64" ]; then CPU_ARCH="amd64"; else CPU_ARCH="arm64"; fi && \

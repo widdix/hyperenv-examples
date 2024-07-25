@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ['hyperenv', 'demo']
+    runs-on: ['hyperenv-beta', 'byo-vpc']
     steps:
     - uses: actions/checkout@v3
 

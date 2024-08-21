@@ -1,0 +1,26 @@
+name: build-out-of-disk
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - uses: actions/checkout@v3
+    - run: |
+        docker pull cimg/unity:9.9 
+        docker pull cimg/android:2024.08-ndk
+        docker pull cimg/openjdk:17.0.11-browsers
+        docker pull cimg/azure:2024.03
+        docker pull cimg/postgres:16.4-postgis
+        docker pull cimg/deploy:2024.08.1-node
+        docker pull cimg/python:3.12.5-node
+        docker pull cimg/rust:1.80.1-browsers
+        docker pull cimg/go:1.22.6-browsers
+
